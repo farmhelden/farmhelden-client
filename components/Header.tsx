@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <div className={classes.root}>
-      <h1>Farmhelden.de</h1>
+      <h1>Farm-Helden.de</h1>
       <Link href="/helper">
         <Button variant="outlined" color="primary">
           <a>Ansicht wechseln</a>
