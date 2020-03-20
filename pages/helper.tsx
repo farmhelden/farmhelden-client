@@ -58,10 +58,10 @@ function Helper({ data }: any) {
         }}
       >
         <Grid container spacing={2}>
-          <Grid item xs={5}>
+          <Grid item xs={12} sm={5}>
             <TextField id="location" label="Standort" fullWidth />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={12} sm={5}>
             <FormControl fullWidth>
               <InputLabel id="radius-label">Radius</InputLabel>
               <Select labelId="radius-label" id="radius">
@@ -73,7 +73,7 @@ function Helper({ data }: any) {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={2} className={classes.gridSubmitButton}>
+          <Grid item xs={12} sm={2} className={classes.gridSubmitButton}>
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Filtern
             </Button>
