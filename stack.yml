@@ -1,0 +1,32 @@
+version: '3.5'
+
+services:
+  web:
+    image: docker.pkg.github.com/farmhelden/farmhelden-client/web:${release_tag:-staging}
+    build: .
+    networks:
+      internal:
+        aliases:
+          - farmhelden.web
+      external:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=80"
+      - "traefik.docker.network=proxy"
+      - "traefik.frontend.rule=Host:${domain:-web.staging.farm-helden.de}"
+      - "traefik.backend.loadbalancer.method=wrr"
+      - "traefik.frontend.headers.SSLRedirect=true"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 500M
+    environment:
+      - NODE_ENV=production
+
+networks:
+  external:
+    external: true
+    name: proxy
+  internal:
