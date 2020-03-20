@@ -25,13 +25,7 @@ jobs:
         BUILD_CONTEXT: '.'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    # This second step is illustrative and shows how to reference the 
-    # output variables.  This is completely optional.
-    - name: Show outputs of previous step
-      run: |
-        echo "The name:tag of the Docker Image is: $VAR1"
-        echo "The docker image is hosted at $VAR2"
-      env:
-        VAR1: ${{ steps.docker.outputs.IMAGE_SHA_NAME }}
-        VAR2: ${{ steps.docker.outputs.IMAGE_URL }}
+    - name: curl
+      uses: wei/curl@v1
+      with:
+        args: -X POST ${{ secrets.PORTAINER_STAGING_UPDATE_URL }}
