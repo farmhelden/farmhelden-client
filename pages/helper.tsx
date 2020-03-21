@@ -1,13 +1,12 @@
 import { useMemo } from "react";
 import { NextPageContext } from "next";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { Container } from "@material-ui/core";
+import { Formik, FormikProps, Form } from "formik";
 import Grid from "@material-ui/core/Grid";
-import { Table } from "../components/Table";
 
+import { Table } from "../components/Table";
 import Header from "../components/Header";
 import Root from "../components/Root";
-import { Formik, FormikProps, Form } from "formik";
 import { PrimaryButton } from "../components/Button";
 import { InputField } from "../components/Form";
 
@@ -68,20 +67,26 @@ function Helper({ data }: any) {
         >
           {({ values }: FormikProps<typeof initialValues>) => {
             return (
-              <Form>
+              <Form className="mb-6">
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={5}>
                     <InputField
                       name="location"
+                      label="Standort"
                       placeholder="Frankfurt am Main"
                       block
                     />
                   </Grid>
                   <Grid item xs={12} sm={5}>
-                    <InputField name="radius" placeholder="30 km" block />
+                    <InputField
+                      label="Entfernung (km)"
+                      name="radius"
+                      placeholder="30 km"
+                      block
+                    />
                   </Grid>
-                  <Grid item xs={12} sm={2}>
-                    <PrimaryButton type="submit" block>
+                  <Grid item xs={12} sm={2} className="flex items-end">
+                    <PrimaryButton type="submit" className="py-2" block>
                       Filtern
                     </PrimaryButton>
                   </Grid>
