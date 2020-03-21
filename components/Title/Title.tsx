@@ -19,7 +19,11 @@ const Title = ({
   children,
   ...rest
 }: Props) => {
-  const css = classnames({ block, "font-medium": bold }, className);
+  const css = classnames(
+    "font-title",
+    { block, "font-medium": bold },
+    className
+  );
 
   return (
     <Component className={css} {...rest}>
