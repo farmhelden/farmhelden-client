@@ -14,18 +14,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
-// import {
-//   Text,
-//   Modal,
-//   ModalBody, ModalCloseButton,
-//   ModalContent, ModalFooter,
-//   ModalHeader,
-//   ModalOverlay,
-//   useDisclosure
-// } from "@chakra-ui/core"
-
-import SimpleModal from "../components/Dialogue/Dialogue";
-
 import Header from "../components/Header";
 import { StyledTableHead } from "../components/Table";
 import Root from "../components/Root";
@@ -56,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function Helper({ data }: any) {
-  // const { isOpen, onOpen, onClose } = useDisclosure();
   const classes = useStyles();
 
   return (
