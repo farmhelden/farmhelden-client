@@ -14,9 +14,22 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
+// import {
+//   Text,
+//   Modal,
+//   ModalBody, ModalCloseButton,
+//   ModalContent, ModalFooter,
+//   ModalHeader,
+//   ModalOverlay,
+//   useDisclosure
+// } from "@chakra-ui/core"
+
+import SimpleModal from "../components/Dialogue/Dialogue";
+
 import Header from "../components/Header";
 import { StyledTableHead } from "../components/Table";
 import Root from "../components/Root";
+import CustomizedDialogs from "../components/Dialogue/Dialogue";
 
 function createData(title: string, location: string, neededHelpers: number) {
   return { title, location, neededHelpers };
@@ -43,6 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function Helper({ data }: any) {
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   const classes = useStyles();
 
   return (
@@ -106,7 +120,32 @@ function Helper({ data }: any) {
                   </TableCell>
                   <TableCell>{row.location}</TableCell>
                   <TableCell>{row.neededHelpers}</TableCell>
-                  <TableCell>Details anzeigen</TableCell>
+                  <TableCell>
+                    <CustomizedDialogs/>
+
+
+                    {/*<Button onClick={onOpen}>Mehr Informationen</Button>*/}
+
+
+                    {/*<Modal isOpen={isOpen} onClose={onClose}>*/}
+                    {/*  <ModalOverlay />*/}
+                    {/*  <ModalContent>*/}
+                    {/*    <ModalHeader>Modal Title</ModalHeader>*/}
+                    {/*    <ModalCloseButton />*/}
+                    {/*    <ModalBody>*/}
+                    {/*      <Text>Das ist irgendein Text</Text>*/}
+                    {/*    </ModalBody>*/}
+
+                    {/*    <ModalFooter>*/}
+                    {/*      <Button onClick={onClose}>*/}
+                    {/*        Close*/}
+                    {/*      </Button>*/}
+                    {/*      <Button >Secondary Action</Button>*/}
+                    {/*    </ModalFooter>*/}
+                    {/*  </ModalContent>*/}
+                    {/*</Modal>*/}
+
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
