@@ -7,7 +7,21 @@
     "build": "next build",
     "build:staging": "cp .env.staging .env && yarn run build",
     "start": "next start",
-    "export": "next export"
+    "export": "next export",
+    "prettier": "prettier --write {components,pages}/**/*.{ts,tsx,html,css}"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "src/**/*.{js,css}": [
+        "prettier --write",
+        "git add"
+      ]
+    }
   },
   "dependencies": {
     "@material-ui/core": "^4.9.7",
@@ -31,6 +45,9 @@
     "@types/yup": "^0.26.33",
     "@zeit/next-css": "^1.0.1",
     "autoprefixer": "^9.7.4",
+    "husky": "4.2.3",
+    "lint-staged": "10.0.8",
+    "prettier": "1.19.1",
     "tailwindcss": "^1.2.0",
     "typescript": "^3.8.3"
   }
