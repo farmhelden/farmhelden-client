@@ -9,7 +9,11 @@ import MapPopUp from "./MapPopUp";
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const points = require('./featurecollection.json');
-
+const mapStyles = {
+    backgroundColor: 'white',
+    height: '100vh',
+    width: '100vw',
+};
 
 class Map extends React.Component<{}, { points: any, bbox: any, modalOpen: boolean, currentHighlight: any }> {
     popUp: any;
@@ -203,11 +207,7 @@ class Map extends React.Component<{}, { points: any, bbox: any, modalOpen: boole
         return <Fragment>
             {/* MODAL */}
             <div
-                style={{
-                    backgroundColor: 'white',
-                    height: '100vh',
-                    width: '100vw',
-                }}
+                style={mapStyles}
                 id='project-map-container'
                 ref={el => this.mapContainer = el}>
 
