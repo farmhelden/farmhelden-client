@@ -7,7 +7,7 @@ type Props = {} & React.DetailedHTMLProps<
 >;
 const Input = ({ className, type = "text", ...rest }: Props) => {
   const css = classnames(
-    "px-2 py-2 border-2 border-gray-400 rounded focus:border-green-400",
+    "px-2 py-2 border-2 border-gray-400 rounded focus:border-secondary-dark",
     className
   );
 

@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 
-type Props = {
+export type Props = {
   as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   block?: boolean;
   bold?: boolean;
@@ -19,7 +19,11 @@ const Title = ({
   children,
   ...rest
 }: Props) => {
-  const css = classnames({ block, "font-medium": bold }, className);
+  const css = classnames(
+    "font-title",
+    { block, "font-medium": bold },
+    className
+  );
 
   return (
     <Component className={css} {...rest}>
