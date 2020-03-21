@@ -1,34 +1,15 @@
 import Link from "next/link";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: theme.spacing(2)
-    },
-    title: {
-      display: "inline-block"
-    },
-    viewButton: {
-      padding: theme.spacing(2)
-    }
-  })
-);
+import { PrimaryButton } from "./Button";
+import { Title } from "./Title";
 
 const Header = () => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
-      <h1>Farm-Helden.de</h1>
+    <div className="flex justify-between items-center mt-4 mb-8">
+      <Title as="h1" className="text-4xl" bold>
+        Farm-Helden.de
+      </Title>
       <Link href="/helper">
-        <Button variant="outlined" color="primary">
-          <a>Ansicht wechseln</a>
-        </Button>
+        <PrimaryButton theme="border">Ansicht wechseln</PrimaryButton>
       </Link>
     </div>
   );
