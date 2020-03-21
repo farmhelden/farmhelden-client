@@ -1,6 +1,11 @@
 const purgecss = require("@fullhuman/postcss-purgecss")({
   // Specify the paths to all of the template files in your project
-  content: ["./pages/*", "./pages/**/*", "./components/*", "./components/**/*"],
+  content: [
+    "./pages/*.tsx",
+    "./pages/**/*.tsx",
+    "./components/*.tsx",
+    "./components/**/*.tsx"
+  ],
 
   // make sure css reset isnt removed on html and body
   whitelist: ["html", "body"],
