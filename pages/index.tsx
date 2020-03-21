@@ -1,203 +1,82 @@
 import Head from "next/head";
+import { Plus, User } from "react-feather";
+import { NextPageContext } from "next";
+import { WithUserAgentProps, withUserAgent } from "next-useragent";
 
-const Home = () => (
-  <div className="container">
-    <Head>
-      <title>Create Next App</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+import { Logo } from "../components/Logo";
+import { Title } from "../components/Title";
+import Root from "../components/Root";
+import { Map } from "../components/Map";
+import { Gradient } from "../components/Gradient";
+import { PrimaryButton } from "../components/Button";
 
-    <main>
-      <h1 className="title">
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
+const Home = (props: WithUserAgentProps) => {
+  const isMobile = props.ua.isMobile;
+  const logoSize = isMobile ? 42 : 80;
+  const iconSize = isMobile ? 24 : 40;
 
-      <p className="description">
-        Get started by editing <code>pages/index.js</code>
-      </p>
+  return (
+    <Root>
+      <Head>
+        <title>Werde Erntehelfer und sichere Deutschlands Ernten!</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className="h-100vh">
+        <div className="relative z-10 bg-white flex justify-between p-2 pb-4">
+          <div className="flex items-center">
+            <Logo size={logoSize} />
+            <Title
+              as="h1"
+              className="text-2xl sm:text-4xl text-primary-dark ml-1"
+              bold
+            >
+              Farmhelden
+            </Title>
+          </div>
+          <div className="flex items-center">
+            <Plus className="mr-2" size={iconSize} />
+            <User size={iconSize} />
+          </div>
+          <Gradient
+            height="15vh"
+            className="absolute left-0 top-100perc z-20"
+            block
+          />
+        </div>
+        <div className="fixed inset-0">
+          <div className="absolute top-0 z-20 flex items-center w-full px-2 h-full">
+            <div className="block w-full md:text-center">
+              <PrimaryButton
+                className="mb-4 py-2 md:w-64 text-xl md:mx-auto"
+                block
+              >
+                Ich suche Unterstützung
+              </PrimaryButton>
+              <PrimaryButton className="py-2 md:w-64 text-xl md:mx-auto" block>
+                Ich möchte helfen
+              </PrimaryButton>
+            </div>
+          </div>
+          <div className="backdrop-blur fixed inset-0 z-0 h-100vh">
+            <Map
+              hideUndoIcon
+              hideNavigationControl
+              hideFullScreenControl
+              blur={4}
+            />
+          </div>
+        </div>
+      </main>
 
-      <div className="grid">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+      <footer></footer>
+    </Root>
+  );
+};
 
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Learn &rarr;</h3>
-          <p>Learn about Next.js in an interactive course with quizzes!</p>
-        </a>
+export async function getInitialProps(
+  ctx: NextPageContext & WithUserAgentProps
+) {
+  return { useragent: ctx.ua.source };
+}
 
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Discover and deploy boilerplate example Next.js projects.</p>
-        </a>
-
-        <a
-          href="https://zeit.co/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          className="card"
-        >
-          <h3>Deploy &rarr;</h3>
-          <p>
-            Instantly deploy your Next.js site to a public URL with ZEIT Now.
-          </p>
-        </a>
-      </div>
-    </main>
-
-    <footer>
-      <a
-        href="https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
-      </a>
-    </footer>
-
-    <style jsx>{`
-      .container {
-        min-height: 100vh;
-        padding: 0 0.5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      main {
-        padding: 5rem 0;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      footer {
-        width: 100%;
-        height: 100px;
-        border-top: 1px solid #eaeaea;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      footer img {
-        margin-left: 0.5rem;
-      }
-
-      footer a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .title a {
-        color: #0070f3;
-        text-decoration: none;
-      }
-
-      .title a:hover,
-      .title a:focus,
-      .title a:active {
-        text-decoration: underline;
-      }
-
-      .title {
-        margin: 0;
-        line-height: 1.15;
-        font-size: 4rem;
-      }
-
-      .title,
-      .description {
-        text-align: center;
-      }
-
-      .description {
-        line-height: 1.5;
-        font-size: 1.5rem;
-      }
-
-      code {
-        background: #fafafa;
-        border-radius: 5px;
-        padding: 0.75rem;
-        font-size: 1.1rem;
-        font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-      }
-
-      .grid {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-
-        max-width: 800px;
-        margin-top: 3rem;
-      }
-
-      .card {
-        margin: 1rem;
-        flex-basis: 45%;
-        padding: 1.5rem;
-        text-align: left;
-        color: inherit;
-        text-decoration: none;
-        border: 1px solid #eaeaea;
-        border-radius: 10px;
-        transition: color 0.15s ease, border-color 0.15s ease;
-      }
-
-      .card:hover,
-      .card:focus,
-      .card:active {
-        color: #0070f3;
-        border-color: #0070f3;
-      }
-
-      .card h3 {
-        margin: 0 0 1rem 0;
-        font-size: 1.5rem;
-      }
-
-      .card p {
-        margin: 0;
-        font-size: 1.25rem;
-        line-height: 1.5;
-      }
-
-      @media (max-width: 600px) {
-        .grid {
-          width: 100%;
-          flex-direction: column;
-        }
-      }
-    `}</style>
-
-    <style jsx global>{`
-      html,
-      body {
-        padding: 0;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-    `}</style>
-  </div>
-);
-
-export default Home;
+export default withUserAgent(Home);
