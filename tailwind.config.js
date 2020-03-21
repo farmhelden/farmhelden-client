@@ -1,6 +1,11 @@
 module.exports = {
   important: true,
-  theme: {},
+  theme: {
+    fontFamily: {
+      title: ["Roboto Slab, sans-serif"],
+      body: ["Roboto, sans-serif"]
+    }
+  },
   variants: {
     backgroundColor: ["responsive", "hover", "focus", "even", "odd"]
   }
