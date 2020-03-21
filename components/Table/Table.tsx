@@ -2,7 +2,7 @@ import React from "react";
 import { useTable, useSortBy } from "react-table";
 import classnames from "classnames";
 
-import { TableRow, TableCell } from "./components";
+import { TableRow, TableCell, SortedIndicator } from "./components";
 
 type Props = {
   columns: Record<string, any>[];
@@ -47,13 +47,10 @@ const Table = ({ columns, data, block = false }: Props) => {
                 >
                   {column.render("Header")}
                   {/* Add a sort direction indicator */}
-                  <span>
-                    {(column as any).isSorted
-                      ? (column as any).isSortedDesc
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}
-                  </span>
+                  <SortedIndicator
+                    isSorted={(column as any).isSorted}
+                    isSortedDesc={(column as any).isSortedDesc}
+                  />
                 </TableCell>
               );
             })}
