@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { NextPageContext } from "next";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { Container, FormControl } from "@material-ui/core";
@@ -6,16 +7,10 @@ import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import { Table } from "../components/Table";
 
 import Header from "../components/Header";
-import { StyledTableHead } from "../components/Table";
 import Root from "../components/Root";
 import CustomizedDialogs from "../components/Dialogue/Dialogue";
 
@@ -43,8 +38,32 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+function useFarmTableColumns() {
+  return useMemo(
+    () => [
+      {
+        Header: "Ernteart",
+        accessor: "title"
+      },
+      {
+        Header: "Standort",
+        accessor: "location"
+      },
+      {
+        Header: "Benötigte Helfer",
+        accessor: "neededHelpers"
+      },
+      {
+        Header: "Aktion"
+      }
+    ],
+    []
+  );
+}
+
 function Helper({ data }: any) {
   const classes = useStyles();
+  const columns = useFarmTableColumns();
 
   return (
     <Root>
@@ -89,32 +108,8 @@ function Helper({ data }: any) {
         </form>
 
         {/* Table */}
-        <TableContainer component={Paper}>
-          <Table aria-label="Derzeitige Ernten" size="small">
-            <StyledTableHead>
-              <TableRow>
-                <TableCell>Ernteart</TableCell>
-                <TableCell>Standort</TableCell>
-                <TableCell>Benötigte Helfer</TableCell>
-                <TableCell>Aktion</TableCell>
-              </TableRow>
-            </StyledTableHead>
-            <TableBody>
-              {data.map(row => (
-                <TableRow key={row.name}>
-                  <TableCell component="th" scope="row">
-                    {row.title}
-                  </TableCell>
-                  <TableCell>{row.location}</TableCell>
-                  <TableCell>{row.neededHelpers}</TableCell>
-                  <TableCell>
-                    <CustomizedDialogs/>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+
+        <Table columns={columns} data={data} block />
       </Container>
     </Root>
   );
