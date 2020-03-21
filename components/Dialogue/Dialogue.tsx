@@ -8,6 +8,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import {Box} from "@material-ui/core";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -57,7 +58,10 @@ const DialogActions = withStyles((theme: Theme) => ({
 }))(MuiDialogActions);
 
 export interface detailedInformationProps {
-  title: string
+  title: string,
+  descriptionText: string
+  location?: string,
+  neededHelpers?: number,
 }
 
 export default function CustomizedDialogs(props: detailedInformationProps) {
@@ -81,9 +85,30 @@ export default function CustomizedDialogs(props: detailedInformationProps) {
           {props.title}
         </DialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            {props.title}
-          </Typography>
+          <Box display="flex" flexDirection="row" pb={0.5} m={0} bgcolor="background.paper">
+            <Box p={1}>
+              Standort:
+            </Box>
+            <Box p={1} bgcolor="grey.300">
+              {props.location}
+            </Box>
+          </Box>
+          <Box display="flex" flexDirection="row" pb={0.5} m={0} bgcolor="background.paper">
+            <Box p={1}>
+              Benötigte Helfer:
+            </Box>
+            <Box p={1} bgcolor="grey.300">
+              {props.neededHelpers}
+            </Box>
+          </Box>
+          <Box display="flex" flexDirection="row" pb={0.5} m={0} bgcolor="background.paper">
+            <Box p={1}>
+              Beschreibung:
+            </Box>
+            <Box p={1} bgcolor="grey.300">
+              {props.descriptionText}
+            </Box>
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">

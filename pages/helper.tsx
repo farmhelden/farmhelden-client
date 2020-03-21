@@ -41,7 +41,14 @@ function useFarmTableColumns() {
       {
         Header: "Aktion",
         accessor: 'detailedInformation',
-        Cell: props => <CustomizedDialogs title={props.title}/>
+        // Cell: props => <CustomizedDialogs title={data.title}/>
+        Cell: (props) => {
+          return <CustomizedDialogs
+            title={props.row.original.title}
+            location={props.row.original.location}
+            neededHelpers={props.row.original.neededHelpers}
+            descriptionText={"Platzhalter für detaillierte Information über das Inserat"}/>;
+        }
       }
     ],
     []
