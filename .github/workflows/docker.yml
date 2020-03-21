@@ -19,13 +19,12 @@ jobs:
       uses: machine-learning-apps/gpr-docker-publish@master
       id: docker
       with:
-        IMAGE_NAME: 'web'
-        TAG: 'staging'
+        IMAGE_NAME: 'web-staging'
         DOCKERFILE_PATH: './Dockerfile'
         BUILD_CONTEXT: '.'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: curl
+    - name: Update Portainer via Webhook
       uses: wei/curl@v1
       with:
         args: -X POST ${{ secrets.PORTAINER_STAGING_UPDATE_URL }}
