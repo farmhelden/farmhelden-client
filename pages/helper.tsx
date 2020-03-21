@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { NextPageContext } from "next";
 import { Container } from "@material-ui/core";
 import { Formik, FormikProps, Form } from "formik";
 import Grid from "@material-ui/core/Grid";
@@ -7,7 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import { Table } from "../components/Table";
 import Header from "../components/Header";
 import Root from "../components/Root";
-import CustomizedDialogs from "../components/Dialogue/Dialogue";
 import { PrimaryButton } from "../components/Button";
 import { InputField } from "../components/Form";
 
@@ -51,7 +49,7 @@ const initialValues = {
   radius: null as number | null
 };
 
-function Helper({ data }: any) {
+function Helper() {
   const columns = useFarmTableColumns();
 
   return (
@@ -103,10 +101,6 @@ function Helper({ data }: any) {
       </Container>
     </Root>
   );
-}
-
-export async function getStaticProps(ctx: NextPageContext) {
-  return { props: { data } };
 }
 
 export default Helper;
