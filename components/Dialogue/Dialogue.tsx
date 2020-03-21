@@ -56,8 +56,11 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
+export interface detailedInformationProps {
+  title: string
+}
 
-export default function CustomizedDialogs({ props }: any) {
+export default function CustomizedDialogs(props: detailedInformationProps) {
 
   const [open, setOpen] = React.useState(false);
 
@@ -75,11 +78,11 @@ export default function CustomizedDialogs({ props }: any) {
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {"Hier kommt ein Titel hinein"}
+          {props.title}
         </DialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-            {"Hier kommt eine Beschreibung hinein"}
+            {props.title}
           </Typography>
         </DialogContent>
         <DialogActions>

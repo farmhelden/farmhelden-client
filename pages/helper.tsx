@@ -39,7 +39,9 @@ function useFarmTableColumns() {
         accessor: "neededHelpers"
       },
       {
-        Header: "Aktion"
+        Header: "Aktion",
+        accessor: 'detailedInformation',
+        Cell: props => <CustomizedDialogs title={props.title}/>
       }
     ],
     []
