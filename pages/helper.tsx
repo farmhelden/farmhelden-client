@@ -122,29 +122,6 @@ function Helper({ data }: any) {
                   <TableCell>{row.neededHelpers}</TableCell>
                   <TableCell>
                     <CustomizedDialogs/>
-
-
-                    {/*<Button onClick={onOpen}>Mehr Informationen</Button>*/}
-
-
-                    {/*<Modal isOpen={isOpen} onClose={onClose}>*/}
-                    {/*  <ModalOverlay />*/}
-                    {/*  <ModalContent>*/}
-                    {/*    <ModalHeader>Modal Title</ModalHeader>*/}
-                    {/*    <ModalCloseButton />*/}
-                    {/*    <ModalBody>*/}
-                    {/*      <Text>Das ist irgendein Text</Text>*/}
-                    {/*    </ModalBody>*/}
-
-                    {/*    <ModalFooter>*/}
-                    {/*      <Button onClick={onClose}>*/}
-                    {/*        Close*/}
-                    {/*      </Button>*/}
-                    {/*      <Button >Secondary Action</Button>*/}
-                    {/*    </ModalFooter>*/}
-                    {/*  </ModalContent>*/}
-                    {/*</Modal>*/}
-
                   </TableCell>
                 </TableRow>
               ))}
