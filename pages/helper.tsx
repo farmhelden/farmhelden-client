@@ -108,7 +108,7 @@ function Helper({ data }: any) {
                   <TableCell>{row.location}</TableCell>
                   <TableCell>{row.neededHelpers}</TableCell>
                   <TableCell>
-                    <CustomizedDialogs/>
+                    <CustomizedDialogs title={"Das ist der Titel"} description={"Das ist die Beschreibung"}/>
                   </TableCell>
                 </TableRow>
               ))}

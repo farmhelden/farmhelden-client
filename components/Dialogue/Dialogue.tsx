@@ -56,7 +56,9 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function CustomizedDialogs() {
+
+export default function CustomizedDialogs({ props }: any) {
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -73,15 +75,11 @@ export default function CustomizedDialogs() {
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Projekt XY in ABC Stadt
+          {"Hier kommt ein Titel hinein"}
         </DialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-            Hier stehen im Idealfall nähere Informationen zu der Ernte etc.
-          </Typography>
-          <Typography gutterBottom>
-            Die props mit den jeweiligen Informationen sollten wohl von
-            helper.tsx geparsed werden.
+            {"Hier kommt eine Beschreibung hinein"}
           </Typography>
         </DialogContent>
         <DialogActions>
