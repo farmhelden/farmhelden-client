@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { Table } from "../components/Table";
 import Header from "../components/Header";
 import Root from "../components/Root";
+import CustomizedDialogs from "../components/Dialogue/Dialogue";
 import { PrimaryButton } from "../components/Button";
 import { InputField } from "../components/Form";
 
@@ -97,6 +98,7 @@ function Helper({ data }: any) {
         </Formik>
 
         {/* Table */}
+
         <Table columns={columns} data={data} block />
       </Container>
     </Root>
