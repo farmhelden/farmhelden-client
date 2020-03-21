@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { NextPageContext } from "next";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { Container, FormControl } from "@material-ui/core";
@@ -6,16 +7,11 @@ import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import { Table } from "../components/Table";
 
 import Header from "../components/Header";
-import { StyledTableHead } from "../components/Table";
+import Root from "../components/Root";
 
 function createData(title: string, location: string, neededHelpers: number) {
   return { title, location, neededHelpers };
@@ -41,72 +37,79 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+function useFarmTableColumns() {
+  return useMemo(
+    () => [
+      {
+        Header: "Ernteart",
+        accessor: "title"
+      },
+      {
+        Header: "Standort",
+        accessor: "location"
+      },
+      {
+        Header: "Benötigte Helfer",
+        accessor: "neededHelpers"
+      },
+      {
+        Header: "Aktion"
+      }
+    ],
+    []
+  );
+}
+
 function Helper({ data }: any) {
   const classes = useStyles();
+  const columns = useFarmTableColumns();
 
   return (
-    <Container>
-      <Header />
+    <Root>
+      <Container>
+        <Header />
+        {/* Form */}
+        <form
+          noValidate
+          autoComplete="off"
+          className={classes.form}
+          onSubmit={e => {
+            e.preventDefault();
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={5}>
+              <TextField id="location" label="Standort" fullWidth />
+            </Grid>
+            <Grid item xs={12} sm={5}>
+              <FormControl fullWidth>
+                <InputLabel id="radius-label">Radius</InputLabel>
+                <Select labelId="radius-label" id="radius">
+                  <MenuItem value={10}>10 km</MenuItem>
+                  <MenuItem value={20}>20 km</MenuItem>
+                  <MenuItem value={30}>30 km</MenuItem>
+                  <MenuItem value={40}>40 km</MenuItem>
+                  <MenuItem value={50}>50 km</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={2} className={classes.gridSubmitButton}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
+                Filtern
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
 
-      {/* Form */}
-      <form
-        noValidate
-        autoComplete="off"
-        className={classes.form}
-        onSubmit={e => {
-          e.preventDefault();
-        }}
-      >
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={5}>
-            <TextField id="location" label="Standort" fullWidth />
-          </Grid>
-          <Grid item xs={12} sm={5}>
-            <FormControl fullWidth>
-              <InputLabel id="radius-label">Radius</InputLabel>
-              <Select labelId="radius-label" id="radius">
-                <MenuItem value={10}>10 km</MenuItem>
-                <MenuItem value={20}>20 km</MenuItem>
-                <MenuItem value={30}>30 km</MenuItem>
-                <MenuItem value={40}>40 km</MenuItem>
-                <MenuItem value={50}>50 km</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={2} className={classes.gridSubmitButton}>
-            <Button type="submit" variant="contained" color="primary" fullWidth>
-              Filtern
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-
-      {/* Table */}
-      <TableContainer component={Paper}>
-        <Table aria-label="Derzeitige Ernten" size="small">
-          <StyledTableHead>
-            <TableRow>
-              <TableCell>Ernteart</TableCell>
-              <TableCell>Standort</TableCell>
-              <TableCell>Benötigte Helfer</TableCell>
-              <TableCell>Aktion</TableCell>
-            </TableRow>
-          </StyledTableHead>
-          <TableBody>
-            {data.map(row => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.title}
-                </TableCell>
-                <TableCell>{row.location}</TableCell>
-                <TableCell>{row.neededHelpers}</TableCell>
-                <TableCell>Details anzeigen</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+        {/* Table */}
+        <Table columns={columns} data={data} block />
+      </Container>
+    </Root>
   );
 }
 
