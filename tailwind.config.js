@@ -13,10 +13,21 @@ module.exports = {
         "secondary-dark": "#749A60",
         "accent-light": "#F5E5D4",
         "accent-dark": "#F5E5D4"
+      },
+      height: {
+        "100vh": "100vh"
+      },
+      inset: {
+        "100perc": "100%"
       }
+    },
+    backdropFilter: {
+      none: "none",
+      blur: "blur(20px)"
     }
   },
   variants: {
     backgroundColor: ["responsive", "hover", "focus", "even", "odd"]
-  }
+  },
+  plugins: [require("tailwindcss-filters")]
 };
