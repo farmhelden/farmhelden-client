@@ -1,5 +1,5 @@
-const withCss = require("@zeit/next-css");
 require('dotenv').config();
+const withCss = require("@zeit/next-css");
 
 module.exports = withCss({
   publicRuntimeConfig: {
