@@ -7,7 +7,8 @@ import { BooleanSwitch } from "../components/Switch";
 import {
   BoardingFarmerIntroduction,
   BoardingFarmerSupportData,
-  BoardingFarmerDateSelection
+  BoardingFarmerDateSelection,
+  BoardingFarmerContact
 } from "../components/BoardingFarmer";
 
 type Props = {};
@@ -15,7 +16,8 @@ type Props = {};
 const steps = [
   // { index: 0, Component: BoardingFarmerIntroduction },
   { index: 0, Component: BoardingFarmerSupportData },
-  { index: 1, Component: BoardingFarmerDateSelection }
+  { index: 1, Component: BoardingFarmerDateSelection },
+  { index: 2, Component: BoardingFarmerContact }
 ];
 
 const lastIndex = steps.length - 1;
