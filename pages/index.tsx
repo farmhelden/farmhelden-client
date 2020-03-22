@@ -60,13 +60,12 @@ const Home = (props: WithUserAgentProps) => {
                 className="font-title py-2 md:w-64 text-xl md:mx-auto rounded-full bg-accent-dark border-accent-dark text-white"
                 block
               >
-                Ich möchte helfen
+                <Link href="/map">Ich möchte helfen</Link>
               </BaseButton>
             </div>
           </div>
           <div className="backdrop-blur fixed inset-0 z-0 h-100vh">
             <Map
-              hideUndoIcon
               hideNavigationControl
               hideFullScreenControl
               blur={4}
