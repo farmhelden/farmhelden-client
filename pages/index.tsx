@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Plus, User } from "react-feather";
 import { NextPageContext } from "next";
 import { WithUserAgentProps, withUserAgent } from "next-useragent";
 
@@ -15,8 +14,7 @@ import BaseButton from "../components/Button/BaseButton";
 const Home = (props: WithUserAgentProps) => {
   const router = useRouter();
   const isMobile = props.ua.isMobile;
-  const logoSize = isMobile ? 42 : 80;
-  const iconSize = isMobile ? 24 : 40;
+  const logoSize = isMobile ? 60 : 80;
 
   return (
     <Root>
@@ -30,15 +28,11 @@ const Home = (props: WithUserAgentProps) => {
             <Logo size={logoSize} />
             <Title
               as="h1"
-              className="text-2xl sm:text-4xl text-primary-dark ml-1"
+              className="text-3xl sm:text-4xl text-primary-dark ml-1"
               bold
             >
               FarmHelden
             </Title>
-          </div>
-          <div className="flex items-center">
-            <Plus className="mr-2" size={iconSize} />
-            <User size={iconSize} />
           </div>
           <Gradient
             height="15vh"
@@ -65,11 +59,7 @@ const Home = (props: WithUserAgentProps) => {
             </div>
           </div>
           <div className="backdrop-blur fixed inset-0 z-0 h-100vh">
-            <Map
-              hideNavigationControl
-              hideFullScreenControl
-              blur={4}
-            />
+            <Map hideNavigationControl hideFullScreenControl blur={4} />
           </div>
         </div>
       </main>
