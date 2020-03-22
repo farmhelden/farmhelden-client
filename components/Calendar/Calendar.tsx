@@ -1,28 +1,18 @@
-import React, {Component, useState} from 'react';
-import Calendar from 'react-calendar';
+import React from "react";
+import ReactCalendar from "react-calendar";
+import "./Calendar.css";
 
-export interface CalendarDateProps {
-  startDate: string,
-  endDate: string
- // onChange: dates: [string, string] => void
-}
+type Props = {
+  onChange: (dates: [string, string]) => void;
+  [key: string]: any;
+};
 
-const CalendarPicker = () => {
-
-  const [startDate, setStartDate] = useState<CalendarDateProps>(null);
-  const [endDate, setEndDate] = useState<CalendarDateProps>(null);
-
+const Calendar = ({ onChange, ...rest }: Props) => {
   return (
     <div>
-      <Calendar
-        onChange={(dates) => {
-          setStartDate(dates[0]);
-          setEndDate(dates[1]);
-        }}
-        selectRange={true}
-       />
+      <ReactCalendar onChange={onChange} selectRange={true} {...rest} />
     </div>
   );
 };
 
-export default CalendarPicker;
+export default Calendar;
