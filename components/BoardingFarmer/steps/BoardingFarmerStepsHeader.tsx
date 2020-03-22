@@ -17,7 +17,7 @@ const BoardingFarmerStepsHeader = ({ handleGoBack }: Props) => {
         <ChevronLeft className="mr-1" size={16} />
         Zurück
       </span>
-      <Title as="h6" className="text-lg">
+      <Title as="h6" className="text-md">
         Unterstützung suchen
       </Title>
       <span className="text-gray-500 hover:text-gray-600">
