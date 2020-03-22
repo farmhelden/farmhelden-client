@@ -70,7 +70,7 @@ const BoardingFarmer = ({}: Props) => {
               {menuItems.map(item => (
                 <li
                   key={item.key}
-                  className="flex items-center justify-between border-b border-gray-200 px-1 py-2 hover:cursor-pointer hover:text-primary-light"
+                  className="flex items-center justify-between border-b border-gray-200 px-1 py-2 cursor-pointer hover:text-primary-light"
                   onClick={() => setActiveItem(item)}
                 >
                   <div>
@@ -87,9 +87,9 @@ const BoardingFarmer = ({}: Props) => {
           </Fragment>
         ) : (
           <Fragment>
-            <div className="flex justify-between items-end mb-4 w-full">
+            <div className="flex justify-between items-end mb-2 w-full">
               <span
-                className="flex items-center text-primary-dark hover:cursor-pointer"
+                className="flex items-center text-primary-dark cursor-pointer"
                 onClick={() =>
                   setActiveItem(
                     isFirstStep ? null : menuItems[activeItem.index - 1]
@@ -105,7 +105,23 @@ const BoardingFarmer = ({}: Props) => {
                 <Link href="/">Abbrechen</Link>
               </span>
             </div>
-            <activeItem.Icon />
+            <div className="block text-center">
+              <Title as="h2" className="mb-2 text-xl text-primary-dark" bold>
+                {activeItem.title}
+              </Title>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+              erat, sed diam voluptua. At vero eos et accusam et justo duo
+              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+              sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+              amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+              invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+              Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+              dolor sit amet.
+            </p>
             <div className="fixed bottom-0 left-0 w-full p-4 pb-6">
               {reachedFinalStep ? (
                 <BaseButton className="bg-black text-white border-black" block>
