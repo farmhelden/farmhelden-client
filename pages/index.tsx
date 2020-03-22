@@ -48,13 +48,13 @@ const Home = (props: WithUserAgentProps) => {
           <div className="absolute top-0 z-20 flex items-center w-full px-2 h-full">
             <div className="block w-full md:text-center">
               <BaseButton
-                className="mb-4 py-2 md:w-64 text-xl md:mx-auto rounded-full bg-primary-light border-primary-light text-white"
+                className="font-title mb-4 py-2 md:w-64 text-xl md:mx-auto rounded-full bg-primary-light border-primary-light text-white"
                 block
               >
                 <Link href="/boarding-farmer">Ich suche Unterstützung</Link>
               </BaseButton>
               <BaseButton
-                className="py-2 md:w-64 text-xl md:mx-auto rounded-full bg-accent-dark border-accent-dark text-white"
+                className="font-title py-2 md:w-64 text-xl md:mx-auto rounded-full bg-accent-dark border-accent-dark text-white"
                 block
               >
                 Ich möchte helfen
