@@ -1,12 +1,14 @@
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import mapboxgl from "../../lib/ssrSafeMapboxgl";
+import API from "../../lib/api";
 import UndoIcon from "@material-ui/icons/Undo";
 import * as turf from "@turf/turf";
 
 import MapPopUp from "./MapPopUp";
 
 import "mapbox-gl/dist/mapbox-gl.css";
+import axiosInstance from "../../lib/axiosInstance";
 
 type Props = {
   hideUndoIcon?: boolean;
@@ -16,7 +18,6 @@ type Props = {
   blur?: number;
 };
 
-const points = require("./featurecollection.json");
 const mapStyles = {
   backgroundColor: "white",
   height: "100vh",
@@ -36,8 +37,8 @@ class Map extends React.Component<
     super(props);
 
     this.state = {
-      points,
-      bbox: turf.bbox(points),
+      points: null,
+      bbox: null,
       modalOpen: false,
       currentHighlight: null
     };
@@ -46,9 +47,23 @@ class Map extends React.Component<
     this.pointsLayerName = "points";
   }
 
-  componentDidMount() {
-    const { points, bbox } = this.state;
+  async componentDidMount() {
     const { hideNavigationControl, hideFullScreenControl } = this.props;
+    /*
+    const { data } = useRequest<string[]>({
+      url: 'https://api.staging.farm-helden.de/campaigns'
+    })
+    */
+   /*
+    const resp = await axiosInstance.post(API.user.signIn, {"user": {"email": "florian.gerhardt92@gmail.com", "password": "asdf1234"}})
+    console.log(resp)
+    */
+    const response = await axiosInstance.get(API.campaigns.collection);
+    const response2 = await axiosInstance.get(API.locations.geoJson);
+    console.log(response, response2)
+    const points = response2.data;
+    const bbox = turf.bbox(points);
+    this.setState({bbox, points})
 
     this.map = new mapboxgl.Map({
       bounds: bbox,

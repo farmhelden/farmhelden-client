@@ -1,1 +1,1 @@
-export { useData } from "./useData";
+export { default as useRequest } from "./useRequest";
