@@ -15,7 +15,13 @@ import Root from "../components/Root";
 import { Title } from "../components/Title";
 import { PrimaryButton } from "../components/Button";
 import BaseButton from "../components/Button/BaseButton";
-import { BoardingFarmerSupport } from "../components/BoardingFarmer";
+import {
+  BoardingFarmerSupport,
+  BoardingFarmerHelpers,
+  BoardingFarmerLocation,
+  BoardingFarmerSkills,
+  BoardingFarmerDifficulty
+} from "../components/BoardingFarmer";
 import { Maybe, ValueOf } from "../types";
 
 type Props = {};
@@ -26,7 +32,8 @@ const menuItems = [
     key: "location",
     stateKey: "location" as "location",
     title: "Standort eingeben",
-    Icon: MapPin
+    Icon: MapPin,
+    Component: BoardingFarmerLocation
   },
   {
     index: 1,
@@ -41,21 +48,24 @@ const menuItems = [
     key: "helpers",
     stateKey: "helpersNeededCount" as "helpersNeededCount",
     title: "Benötigte Helfer",
-    Icon: Users
+    Icon: Users,
+    Component: BoardingFarmerHelpers
   },
   {
     index: 3,
     key: "skills",
     stateKey: "requiredSkillsIds" as "requiredSkillsIds",
     title: "Qualifikationen (optional)",
-    Icon: Award
+    Icon: Award,
+    Component: BoardingFarmerSkills
   },
   {
     index: 4,
-    key: "comment",
-    stateKey: "comment" as "comment",
-    title: "Anmerkungen (optional)",
-    Icon: MessageSquare
+    key: "skills",
+    stateKey: "requiredSkillsIds" as "requiredSkillsIds",
+    title: "Schwierigkeitsgrad",
+    Icon: MessageSquare,
+    Component: BoardingFarmerSkills
   }
 ];
 
@@ -65,8 +75,8 @@ export type State = {
   location: Maybe<string>;
   supportTypeIds: string[];
   helpersNeededCount: Maybe<number>;
-  requiredSkillsIds: Maybe<string[]>;
-  comment: Maybe<string>;
+  requiredSkillsIds: string[];
+  difficulty: Maybe<number>;
 };
 
 function useBoardingFarmerState() {
@@ -74,8 +84,8 @@ function useBoardingFarmerState() {
     location: null,
     supportTypeIds: [],
     helpersNeededCount: null,
-    requiredSkillsIds: null,
-    comment: null
+    requiredSkillsIds: [],
+    difficulty: null
   };
 
   const [state, setState] = useState<State>(initialState);
@@ -146,6 +156,7 @@ const BoardingFarmer = ({}: Props) => {
             <div>
               {
                 <activeItem.Component
+                  key={activeItem.key}
                   handleUpdate={updateState(activeItem.stateKey)}
                   state={state}
                 />
