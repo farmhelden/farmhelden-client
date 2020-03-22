@@ -10,6 +10,8 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
   // make sure css reset isnt removed on html and body
   whitelist: ["html", "body"],
 
+  whitelistPatterns: [/mgl-map-wrapper.*/, /mapboxgl.*/],
+
   // Include any special characters you're using in this regular expression
   defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
 });
