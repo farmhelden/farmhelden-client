@@ -57,7 +57,7 @@ const Home = (props: WithUserAgentProps) => {
                 className="font-title py-2 md:w-64 text-xl md:mx-auto rounded-full bg-accent-dark border-accent-dark text-white"
                 block
               >
-                Ich möchte helfen
+                <Link href="/map">Ich möchte helfen</Link>
               </BaseButton>
             </div>
           </div>
