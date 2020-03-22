@@ -1,7 +1,7 @@
 import React from "react";
 import { BoardingFarmerProps } from ".";
-import { Checkbox } from "../Form/components";
-import { updateArray } from "../../utils/immutable";
+import { Checkbox } from "../../Form/components";
+import { updateArray } from "../../../utils/immutable";
 
 type Props = BoardingFarmerProps;
 
