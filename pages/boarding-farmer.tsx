@@ -23,7 +23,7 @@ import {
   BoardingFarmerDifficulty
 } from "../components/BoardingFarmer";
 import { Maybe, ValueOf } from "../types";
-import { Pill } from "../components/Pill";
+import { FadingPillList } from "../components/Pill";
 
 type Props = {};
 type RenderProps = {
@@ -38,7 +38,7 @@ const menuItems = [
     title: "Standort eingeben",
     Icon: MapPin,
     Component: BoardingFarmerLocation,
-    Render: ({ value }: RenderProps) => <Fragment>hello</Fragment>
+    Render: ({ value }: RenderProps) => <Fragment>{value}</Fragment>
   },
   {
     index: 1,
@@ -48,13 +48,17 @@ const menuItems = [
     Icon: Star,
     Component: BoardingFarmerSupport,
     Render: ({ value }: RenderProps) => (
-      <Fragment>
-        {value.map(v => (
-          <Pill key={v} className="mr-1">
-            {v}
-          </Pill>
-        ))}
-      </Fragment>
+      <FadingPillList>
+        {Pill => (
+          <Fragment>
+            {value.map(v => (
+              <Pill key={v} className="mr-1">
+                {v}
+              </Pill>
+            ))}
+          </Fragment>
+        )}
+      </FadingPillList>
     )
   },
   {
@@ -64,7 +68,7 @@ const menuItems = [
     title: "Benötigte Helfer",
     Icon: Users,
     Component: BoardingFarmerHelpers,
-    Render: ({ value }: RenderProps) => <Fragment>hello</Fragment>
+    Render: ({ value }: RenderProps) => <Fragment>{value}</Fragment>
   },
   {
     index: 3,
@@ -74,13 +78,17 @@ const menuItems = [
     Icon: Award,
     Component: BoardingFarmerSkills,
     Render: ({ value }: RenderProps) => (
-      <Fragment>
-        {value.map(v => (
-          <Pill key={v} className="mr-1">
-            {v}
-          </Pill>
-        ))}
-      </Fragment>
+      <FadingPillList>
+        {Pill => (
+          <Fragment>
+            {value.map(v => (
+              <Pill key={v} className="mr-1">
+                {v}
+              </Pill>
+            ))}
+          </Fragment>
+        )}
+      </FadingPillList>
     )
   },
   {
@@ -90,7 +98,7 @@ const menuItems = [
     title: "Schwierigkeitsgrad",
     Icon: MessageSquare,
     Component: BoardingFarmerSkills,
-    Render: ({ value }: RenderProps) => <Fragment>hello</Fragment>
+    Render: ({ value }: RenderProps) => <Fragment>{value}</Fragment>
   }
 ];
 
@@ -151,23 +159,20 @@ const BoardingFarmer = ({}: Props) => {
                 return (
                   <li
                     key={item.key}
-                    className="flex items-center justify-between border-b border-gray-200 px-1 py-2 cursor-pointer hover:text-primary-light"
+                    className="relative flex items-center justify-between border-b border-gray-200 px-1 py-2 cursor-pointer hover:text-primary-light"
                     onClick={() => setActiveItem(item)}
                   >
-                    {showValue ? (
-                      <div>
+                    <Fragment>
+                      <div className="flex items-center w-full">
                         <item.Icon size={16} className="inline-block mr-2" />
-                        <item.Render value={stateValue} />
+                        {showValue ? (
+                          <item.Render value={stateValue} />
+                        ) : (
+                          item.title
+                        )}
                       </div>
-                    ) : (
-                      <Fragment>
-                        <div>
-                          <item.Icon size={16} className="inline-block mr-2" />
-                          {item.title}
-                        </div>
-                        <ChevronRight />
-                      </Fragment>
-                    )}
+                      <ChevronRight className="absolute right-0" />
+                    </Fragment>
                   </li>
                 );
               })}
