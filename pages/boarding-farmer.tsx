@@ -41,7 +41,7 @@ const BoardingFarmer = ({}: Props) => {
 
   return (
     <Root>
-      <Container className="pt-4">
+      <Container>
         <BooleanSwitch
           value={hasStarted}
           trueRender={

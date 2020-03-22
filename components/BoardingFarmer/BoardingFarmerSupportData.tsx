@@ -143,7 +143,7 @@ const BoardingFarmerSupportData = (props: Props) => {
   return (
     <Fragment>
       {activeItem === null ? (
-        <Fragment>
+        <div className="pt-4">
           {/* Header */}
           <BoardingFarmerStepsHeader handleGoBack={() => setActiveItem(null)} />
           <BoardingTitle>Wobei benötigst Du Unterstützung?</BoardingTitle>
@@ -175,36 +175,35 @@ const BoardingFarmerSupportData = (props: Props) => {
               );
             })}
           </ul>
-
-          {/* Footer */}
-          <span className="fixed bottom-0 left-0 w-full block text-center p-1 my-4 text-gray-500 hover:text-gray-600">
-            <Link href="/">Abbrechen</Link>
-          </span>
-        </Fragment>
+        </div>
       ) : (
-        <Fragment>
-          {/* Header */}
-          <BoardingFarmerStepsHeader handleGoBack={() => setActiveItem(null)} />
-
-          <div className="block">
-            <Title as="h2" className="mb-2 text-xl text-primary-dark" bold>
-              {activeItem.title}
-            </Title>
-          </div>
-
-          {/* Subpage */}
+        <div className="flex flex-col justify-between h-100vh py-4">
           <div>
-            {
-              <activeItem.Component
-                key={activeItem.key}
-                handleUpdate={updateState(activeItem.stateKey)}
-                state={state}
-              />
-            }
+            {/* Header */}
+            <BoardingFarmerStepsHeader
+              handleGoBack={() => setActiveItem(null)}
+            />
+
+            <div className="block">
+              <Title as="h2" className="mb-2 text-xl text-primary-dark" bold>
+                {activeItem.title}
+              </Title>
+            </div>
+
+            {/* Subpage */}
+            <div>
+              {
+                <activeItem.Component
+                  key={activeItem.key}
+                  handleUpdate={updateState(activeItem.stateKey)}
+                  state={state}
+                />
+              }
+            </div>
           </div>
 
           {/* Footer */}
-          <div className="fixed bottom-0 left-0 w-full p-4 pb-6">
+          <div>
             {reachedFinalStep ? (
               <BaseButton
                 className="bg-black text-white border-black"
@@ -225,7 +224,7 @@ const BoardingFarmerSupportData = (props: Props) => {
               </PrimaryButton>
             )}
           </div>
-        </Fragment>
+        </div>
       )}
     </Fragment>
   );

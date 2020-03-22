@@ -11,10 +11,12 @@ const BoardingFarmerDateSelection = (props: Props) => {
   const [dates, setDates] = useState<[string, string]>(null);
 
   return (
-    <Fragment>
-      <BoardingFarmerStepsHeader handleGoBack={() => {}} />
-      <BoardingTitle>Wann benötigst Du Unterstützung?</BoardingTitle>
-      <Calendar onChange={setDates} />
+    <div className="flex flex-col justify-between h-100vh py-4">
+      <div>
+        <BoardingFarmerStepsHeader handleGoBack={() => {}} />
+        <BoardingTitle>Wann benötigst Du Unterstützung?</BoardingTitle>
+        <Calendar onChange={setDates} className="mx-auto mt-4" />
+      </div>
       <BaseButton
         className="bg-black text-white border-black"
         onClick={props.triggerNextPage}
@@ -22,7 +24,7 @@ const BoardingFarmerDateSelection = (props: Props) => {
       >
         Kontaktdaten angeben
       </BaseButton>
-    </Fragment>
+    </div>
   );
 };
 
