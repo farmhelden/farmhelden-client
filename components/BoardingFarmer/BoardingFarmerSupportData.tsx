@@ -90,16 +90,16 @@ const menuItems = [
         )}
       </FadingPillList>
     )
-  },
-  {
-    index: 4,
-    key: "skills",
-    stateKey: "requiredSkillsIds" as "requiredSkillsIds",
-    title: "Schwierigkeitsgrad",
-    Icon: MessageSquare,
-    Component: BoardingFarmerSkills,
-    Render: ({ value }: RenderProps) => <Fragment>{value}</Fragment>
   }
+  // {
+  //   index: 4,
+  //   key: "skills",
+  //   stateKey: "requiredSkillsIds" as "requiredSkillsIds",
+  //   title: "Schwierigkeitsgrad",
+  //   Icon: MessageSquare,
+  //   Component: BoardingFarmerSkills,
+  //   Render: ({ value }: RenderProps) => <Fragment>{value}</Fragment>
+  // }
 ];
 
 const totalItems = menuItems.length;

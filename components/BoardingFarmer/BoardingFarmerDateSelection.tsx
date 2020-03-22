@@ -8,6 +8,7 @@ import { NextStepProps } from ".";
 type Props = {} & Pick<NextStepProps, "triggerNextPage">;
 
 const BoardingFarmerDateSelection = (props: Props) => {
+  const today = new Date();
   const [dates, setDates] = useState<[string, string]>(null);
 
   return (
@@ -15,7 +16,11 @@ const BoardingFarmerDateSelection = (props: Props) => {
       <div>
         <BoardingFarmerStepsHeader handleGoBack={() => {}} />
         <BoardingTitle>Wann benötigst Du Unterstützung?</BoardingTitle>
-        <Calendar onChange={setDates} className="mx-auto mt-4" />
+        <Calendar
+          onChange={setDates}
+          className="mx-auto mt-4"
+          minDate={today}
+        />
       </div>
       <BaseButton
         className="bg-black text-white border-black"
