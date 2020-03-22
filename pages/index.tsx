@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { Plus, User } from "react-feather";
 import { NextPageContext } from "next";
 import { WithUserAgentProps, withUserAgent } from "next-useragent";
@@ -8,7 +9,7 @@ import { Title } from "../components/Title";
 import Root from "../components/Root";
 import { Map } from "../components/Map";
 import { Gradient } from "../components/Gradient";
-import { PrimaryButton } from "../components/Button";
+import BaseButton from "../components/Button/BaseButton";
 
 const Home = (props: WithUserAgentProps) => {
   const isMobile = props.ua.isMobile;
@@ -30,7 +31,7 @@ const Home = (props: WithUserAgentProps) => {
               className="text-2xl sm:text-4xl text-primary-dark ml-1"
               bold
             >
-              Farmhelden
+              FarmHelden
             </Title>
           </div>
           <div className="flex items-center">
@@ -46,15 +47,18 @@ const Home = (props: WithUserAgentProps) => {
         <div className="fixed inset-0">
           <div className="absolute top-0 z-20 flex items-center w-full px-2 h-full">
             <div className="block w-full md:text-center">
-              <PrimaryButton
-                className="mb-4 py-2 md:w-64 text-xl md:mx-auto"
+              <BaseButton
+                className="mb-4 py-2 md:w-64 text-xl md:mx-auto rounded-full bg-primary-light border-primary-light text-white"
                 block
               >
-                Ich suche Unterstützung
-              </PrimaryButton>
-              <PrimaryButton className="py-2 md:w-64 text-xl md:mx-auto" block>
+                <Link href="/boarding-farmer">Ich suche Unterstützung</Link>
+              </BaseButton>
+              <BaseButton
+                className="py-2 md:w-64 text-xl md:mx-auto rounded-full bg-accent-dark border-accent-dark text-white"
+                block
+              >
                 Ich möchte helfen
-              </PrimaryButton>
+              </BaseButton>
             </div>
           </div>
           <div className="backdrop-blur fixed inset-0 z-0 h-100vh">
