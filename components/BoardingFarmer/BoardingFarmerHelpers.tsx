@@ -8,8 +8,12 @@ const BoardingFarmerHelpers = ({ state, handleUpdate }: Props) => {
   return (
     <Input
       type="number"
+      min={1}
+      max={1000}
       value={state.helpersNeededCount}
       onChange={e => handleUpdate(e.currentTarget.value)}
+      autoFocus
+      block
     />
   );
 };
