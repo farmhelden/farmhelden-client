@@ -1,6 +1,5 @@
 import React from "react";
 import ReactCalendar from "react-calendar";
-import "./Calendar.css";
 
 type Props = {
   onChange: (dates: [string, string]) => void;
