@@ -1,10 +1,7 @@
-/*
-const domain = process.env.REACT_APP_API_PATH;
-*/
-/*
-const domain = "http://localhost:8000"
-*/
-const domain = "https://api.staging.farm-helden.de"
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
+
+const domain = publicRuntimeConfig.API_PATH;
 
 export default {
     user: {
