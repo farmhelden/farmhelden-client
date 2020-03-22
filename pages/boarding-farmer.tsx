@@ -23,8 +23,12 @@ import {
   BoardingFarmerDifficulty
 } from "../components/BoardingFarmer";
 import { Maybe, ValueOf } from "../types";
+import { Pill } from "../components/Pill";
 
 type Props = {};
+type RenderProps = {
+  value: any;
+};
 
 const menuItems = [
   {
@@ -33,7 +37,8 @@ const menuItems = [
     stateKey: "location" as "location",
     title: "Standort eingeben",
     Icon: MapPin,
-    Component: BoardingFarmerLocation
+    Component: BoardingFarmerLocation,
+    Render: ({ value }: RenderProps) => <Fragment>hello</Fragment>
   },
   {
     index: 1,
@@ -41,7 +46,16 @@ const menuItems = [
     stateKey: "supportTypeIds" as "supportTypeIds",
     title: "Art der Unterstützung",
     Icon: Star,
-    Component: BoardingFarmerSupport
+    Component: BoardingFarmerSupport,
+    Render: ({ value }: RenderProps) => (
+      <Fragment>
+        {value.map(v => (
+          <Pill key={v} className="mr-1">
+            {v}
+          </Pill>
+        ))}
+      </Fragment>
+    )
   },
   {
     index: 2,
@@ -49,7 +63,8 @@ const menuItems = [
     stateKey: "helpersNeededCount" as "helpersNeededCount",
     title: "Benötigte Helfer",
     Icon: Users,
-    Component: BoardingFarmerHelpers
+    Component: BoardingFarmerHelpers,
+    Render: ({ value }: RenderProps) => <Fragment>hello</Fragment>
   },
   {
     index: 3,
@@ -57,7 +72,16 @@ const menuItems = [
     stateKey: "requiredSkillsIds" as "requiredSkillsIds",
     title: "Qualifikationen (optional)",
     Icon: Award,
-    Component: BoardingFarmerSkills
+    Component: BoardingFarmerSkills,
+    Render: ({ value }: RenderProps) => (
+      <Fragment>
+        {value.map(v => (
+          <Pill key={v} className="mr-1">
+            {v}
+          </Pill>
+        ))}
+      </Fragment>
+    )
   },
   {
     index: 4,
@@ -65,7 +89,8 @@ const menuItems = [
     stateKey: "requiredSkillsIds" as "requiredSkillsIds",
     title: "Schwierigkeitsgrad",
     Icon: MessageSquare,
-    Component: BoardingFarmerSkills
+    Component: BoardingFarmerSkills,
+    Render: ({ value }: RenderProps) => <Fragment>hello</Fragment>
   }
 ];
 
@@ -95,49 +120,71 @@ function useBoardingFarmerState() {
   return [state, updateState] as [typeof state, typeof updateState];
 }
 
+function hasValue(v: any) {
+  const isNull = v === null;
+  const emptyArray = Array.isArray(v) && v.length === 0;
+
+  return !(isNull || emptyArray);
+}
+
 const BoardingFarmer = ({}: Props) => {
   const [activeItem, setActiveItem] = useState<typeof menuItems[0]>(null);
   const [state, updateState] = useBoardingFarmerState();
   const reachedFinalStep = activeItem?.index === totalItems - 1;
-  const isFirstStep = activeItem && activeItem.index === 0;
 
   return (
     <Root>
       <Container className="pt-4">
         {activeItem === null ? (
           <Fragment>
+            {/* Header */}
             <Title as="h1" className="text-primary-dark text-2xl mb-2">
               Was und wo?
             </Title>
+
+            {/* Overview */}
             <ul>
-              {menuItems.map(item => (
-                <li
-                  key={item.key}
-                  className="flex items-center justify-between border-b border-gray-200 px-1 py-2 cursor-pointer hover:text-primary-light"
-                  onClick={() => setActiveItem(item)}
-                >
-                  <div>
-                    <item.Icon size={16} className="inline-block mr-2" />
-                    {item.title}
-                  </div>
-                  <ChevronRight />
-                </li>
-              ))}
+              {menuItems.map(item => {
+                const stateValue = state[item.stateKey];
+                const showValue = hasValue(stateValue);
+
+                return (
+                  <li
+                    key={item.key}
+                    className="flex items-center justify-between border-b border-gray-200 px-1 py-2 cursor-pointer hover:text-primary-light"
+                    onClick={() => setActiveItem(item)}
+                  >
+                    {showValue ? (
+                      <div>
+                        <item.Icon size={16} className="inline-block mr-2" />
+                        <item.Render value={stateValue} />
+                      </div>
+                    ) : (
+                      <Fragment>
+                        <div>
+                          <item.Icon size={16} className="inline-block mr-2" />
+                          {item.title}
+                        </div>
+                        <ChevronRight />
+                      </Fragment>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
+
+            {/* Footer */}
             <span className="fixed bottom-0 left-0 w-full block text-center p-1 my-4 text-gray-500 hover:text-gray-600">
               <Link href="/">Abbrechen</Link>
             </span>
           </Fragment>
         ) : (
           <Fragment>
+            {/* Header */}
             <div className="flex justify-between items-end mb-4 w-full">
               <span
                 className="flex items-center text-primary-dark cursor-pointer"
-                onClick={() =>
-                  setActiveItem(
-                    isFirstStep ? null : menuItems[activeItem.index - 1]
-                  )
-                }
+                onClick={() => setActiveItem(null)}
               >
                 <ChevronLeft className="mr-1" size={16} />
                 Zurück
@@ -153,6 +200,8 @@ const BoardingFarmer = ({}: Props) => {
                 {activeItem.title}
               </Title>
             </div>
+
+            {/* Subpage */}
             <div>
               {
                 <activeItem.Component
@@ -162,6 +211,8 @@ const BoardingFarmer = ({}: Props) => {
                 />
               }
             </div>
+
+            {/* Footer */}
             <div className="fixed bottom-0 left-0 w-full p-4 pb-6">
               {reachedFinalStep ? (
                 <BaseButton className="bg-black text-white border-black" block>
