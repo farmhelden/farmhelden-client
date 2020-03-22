@@ -12,9 +12,6 @@ const Header = () => {
           Farm-Helden.de
         </Title>
       </div>
-      <Link href="/helper">
-        <PrimaryButton theme="border">Ansicht wechseln</PrimaryButton>
-      </Link>
     </div>
   );
 };
