@@ -12,7 +12,7 @@ module.exports = {
         "secondary-light": "#CEEECE",
         "secondary-dark": "#749A60",
         "accent-light": "#F5E5D4",
-        "accent-dark": "#F5E5D4"
+        "accent-dark": "#F2AC7D"
       },
       height: {
         "100vh": "100vh"
