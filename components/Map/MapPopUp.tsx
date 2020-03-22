@@ -7,16 +7,18 @@ const propTypes = {
     feature: PropTypes.object,
 };
 
+const mapPopUpStyle = {
+    backgroundColor: "white",
+};
+
 const MapPopUp = ({
                       id,
                       feature,
                       onClick,
                   }) => {
-    return <span
-        className='map-pop-up-custom-mapgoxgl-pop-up'>
-    <p>{`Punkt ID: ${id}`}</p>
-
-  </span>
+    return <div style={mapPopUpStyle}>
+        <p>{`Location ID: ${id}`}</p>
+    </div>
 };
 
 MapPopUp.propTypes = propTypes;
