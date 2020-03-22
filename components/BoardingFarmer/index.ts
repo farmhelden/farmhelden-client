@@ -1,12 +1,8 @@
-import { State } from "../../pages/boarding-farmer";
+export { default as BoardingFarmerDateSelection } from "./BoardingFarmerDateSelection";
+export { default as BoardingFarmerIntroduction } from "./BoardingFarmerIntroduction";
+export { default as BoardingFarmerSupportData } from "./BoardingFarmerSupportData";
 
-export { default as BoardingFarmerDifficulty } from "./BoardingFarmerDifficulty";
-export { default as BoardingFarmerHelpers } from "./BoardingFarmerHelpers";
-export { default as BoardingFarmerLocation } from "./BoardingFarmerLocation";
-export { default as BoardingFarmerSkills } from "./BoardingFarmerSkills";
-export { default as BoardingFarmerSupport } from "./BoardingFarmerSupport";
-
-export type BoardingFarmerProps = {
-  handleUpdate: (value: any) => void;
-  state: State;
+export type NextStepProps = {
+  triggerNextPage: () => void;
+  stepIndicatorBar: React.ReactNode;
 };

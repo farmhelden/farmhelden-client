@@ -1,6 +1,6 @@
 import React from "react";
 import { BoardingFarmerProps } from ".";
-import { Input } from "../Form/components";
+import { Input } from "../../Form/components";
 
 type Props = BoardingFarmerProps;
 
