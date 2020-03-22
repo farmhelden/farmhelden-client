@@ -8,12 +8,21 @@ import {
   ChevronLeft,
   ChevronRight
 } from "react-feather";
+import { Container } from "@material-ui/core";
+import Link from "next/link";
+
 import Root from "../components/Root";
 import { Title } from "../components/Title";
-import { Container } from "@material-ui/core";
 import { PrimaryButton } from "../components/Button";
-import Link from "next/link";
 import BaseButton from "../components/Button/BaseButton";
+import {
+  BoardingFarmerSupport,
+  BoardingFarmerHelpers,
+  BoardingFarmerLocation,
+  BoardingFarmerSkills,
+  BoardingFarmerDifficulty
+} from "../components/BoardingFarmer";
+import { Maybe, ValueOf } from "../types";
 
 type Props = {};
 
@@ -21,40 +30,74 @@ const menuItems = [
   {
     index: 0,
     key: "location",
+    stateKey: "location" as "location",
     title: "Standort eingeben",
-    Icon: MapPin
+    Icon: MapPin,
+    Component: BoardingFarmerLocation
   },
   {
     index: 1,
     key: "support",
+    stateKey: "supportTypeIds" as "supportTypeIds",
     title: "Art der Unterstützung",
-    Icon: Star
+    Icon: Star,
+    Component: BoardingFarmerSupport
   },
   {
     index: 2,
     key: "helpers",
+    stateKey: "helpersNeededCount" as "helpersNeededCount",
     title: "Benötigte Helfer",
-    Icon: Users
+    Icon: Users,
+    Component: BoardingFarmerHelpers
   },
   {
     index: 3,
     key: "skills",
+    stateKey: "requiredSkillsIds" as "requiredSkillsIds",
     title: "Qualifikationen (optional)",
-    Icon: Award
+    Icon: Award,
+    Component: BoardingFarmerSkills
   },
   {
     index: 4,
-    key: "comment",
-    title: "Anmerkungen (optional)",
-    Icon: MessageSquare
+    key: "skills",
+    stateKey: "requiredSkillsIds" as "requiredSkillsIds",
+    title: "Schwierigkeitsgrad",
+    Icon: MessageSquare,
+    Component: BoardingFarmerSkills
   }
 ];
 
 const totalItems = menuItems.length;
 
+export type State = {
+  location: Maybe<string>;
+  supportTypeIds: string[];
+  helpersNeededCount: Maybe<number>;
+  requiredSkillsIds: string[];
+  difficulty: Maybe<number>;
+};
+
+function useBoardingFarmerState() {
+  const initialState: State = {
+    location: null,
+    supportTypeIds: [],
+    helpersNeededCount: null,
+    requiredSkillsIds: [],
+    difficulty: null
+  };
+
+  const [state, setState] = useState<State>(initialState);
+  const updateState = (key: keyof State) => (value: ValueOf<typeof key>) =>
+    setState({ ...state, [key]: value });
+
+  return [state, updateState] as [typeof state, typeof updateState];
+}
+
 const BoardingFarmer = ({}: Props) => {
   const [activeItem, setActiveItem] = useState<typeof menuItems[0]>(null);
-  const [location, setLocation] = useState<string>(null);
+  const [state, updateState] = useBoardingFarmerState();
   const reachedFinalStep = activeItem?.index === totalItems - 1;
   const isFirstStep = activeItem && activeItem.index === 0;
 
@@ -87,7 +130,7 @@ const BoardingFarmer = ({}: Props) => {
           </Fragment>
         ) : (
           <Fragment>
-            <div className="flex justify-between items-end mb-2 w-full">
+            <div className="flex justify-between items-end mb-4 w-full">
               <span
                 className="flex items-center text-primary-dark cursor-pointer"
                 onClick={() =>
@@ -105,23 +148,20 @@ const BoardingFarmer = ({}: Props) => {
                 <Link href="/">Abbrechen</Link>
               </span>
             </div>
-            <div className="block text-center">
+            <div className="block">
               <Title as="h2" className="mb-2 text-xl text-primary-dark" bold>
                 {activeItem.title}
               </Title>
             </div>
-            <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
-              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-              sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-              invidunt ut labore et dolore magna aliquyam erat, sed diam
-              voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-              Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-              dolor sit amet.
-            </p>
+            <div>
+              {
+                <activeItem.Component
+                  key={activeItem.key}
+                  handleUpdate={updateState(activeItem.stateKey)}
+                  state={state}
+                />
+              }
+            </div>
             <div className="fixed bottom-0 left-0 w-full p-4 pb-6">
               {reachedFinalStep ? (
                 <BaseButton className="bg-black text-white border-black" block>
