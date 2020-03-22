@@ -9,6 +9,9 @@ const BoardingFarmerLocation = ({ state, handleUpdate }: Props) => {
     <Input
       value={state.location}
       onChange={e => handleUpdate(e.currentTarget.value)}
+      placeholder="z. B. Frankfurt am Main"
+      autoFocus
+      block
     />
   );
 };

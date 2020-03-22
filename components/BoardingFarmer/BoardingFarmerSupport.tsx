@@ -23,9 +23,9 @@ const BoardingFarmerSupport = ({ state, handleUpdate }: Props) => {
           <li key={id}>
             <Checkbox
               value={id}
-              checked={state.supportTypeIds.includes(id)}
+              checked={state.supportTypeIds.includes(title)}
               onChange={() =>
-                handleUpdate(updateArray(id, state.supportTypeIds))
+                handleUpdate(updateArray(title, state.supportTypeIds))
               }
               className="py-1 hover:bg-gray-100"
               block
