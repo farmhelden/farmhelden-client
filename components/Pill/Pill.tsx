@@ -10,7 +10,7 @@ type Props = {
 
 const Pill = ({ children, className, ...rest }: Props) => {
   const css = classnames(
-    "bg-gray-200 rounded-full px-2 py-1",
+    "bg-gray-200 rounded-full px-4 py-1",
     !className && "inline-block",
     className
   );
