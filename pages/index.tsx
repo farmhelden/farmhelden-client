@@ -63,7 +63,6 @@ const Home = (props: WithUserAgentProps) => {
           </div>
           <div className="backdrop-blur fixed inset-0 z-0 h-100vh">
             <Map
-              hideUndoIcon
               hideNavigationControl
               hideFullScreenControl
               blur={4}
