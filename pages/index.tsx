@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Plus, User } from "react-feather";
 import { NextPageContext } from "next";
 import { WithUserAgentProps, withUserAgent } from "next-useragent";
@@ -12,6 +13,7 @@ import { Gradient } from "../components/Gradient";
 import BaseButton from "../components/Button/BaseButton";
 
 const Home = (props: WithUserAgentProps) => {
+  const router = useRouter();
   const isMobile = props.ua.isMobile;
   const logoSize = isMobile ? 42 : 80;
   const iconSize = isMobile ? 24 : 40;
@@ -49,9 +51,10 @@ const Home = (props: WithUserAgentProps) => {
             <div className="block w-full md:text-center">
               <BaseButton
                 className="font-title mb-4 py-2 md:w-64 text-xl md:mx-auto rounded-full bg-primary-light border-primary-light text-white"
+                onClick={() => router.push("/boarding-farmer")}
                 block
               >
-                <Link href="/boarding-farmer">Ich suche Unterstützung</Link>
+                Ich suche Unterstützung
               </BaseButton>
               <BaseButton
                 className="font-title py-2 md:w-64 text-xl md:mx-auto rounded-full bg-accent-dark border-accent-dark text-white"

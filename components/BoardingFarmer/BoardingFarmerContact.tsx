@@ -1,10 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { NextStepProps } from ".";
-import { BoardingFarmerStepsHeader } from "./steps";
+
 import { BoardingTitle } from "../Title";
 import BaseButton from "../Button/BaseButton";
 import { Input } from "../Form/components";
+import { BoardingFarmerStepsHeader } from "./steps";
+import { NextStepProps } from ".";
 
 type Props = {} & Pick<NextStepProps, "triggerNextPage">;
 
@@ -16,9 +17,24 @@ const BoardingFarmerContact = (props: Props) => {
       <div>
         <BoardingFarmerStepsHeader handleGoBack={() => {}} />
         <BoardingTitle>Wie können Dich Erntehelfer erreichen?</BoardingTitle>
-        <Input placeholder="Namen eingeben" />
-        <Input placeholder="E-Mail-Adresse eingeben" />
-        <Input placeholder="Telefonnummer eingeben" />
+        <Input
+          className="focus:bg-gray-200 mb-4"
+          placeholder="Namen eingeben"
+          block
+          borderless
+        />
+        <Input
+          className="focus:bg-gray-200 mb-4"
+          placeholder="E-Mail-Adresse eingeben"
+          block
+          borderless
+        />
+        <Input
+          className="focus:bg-gray-200 mb-4"
+          placeholder="Telefonnummer eingeben"
+          block
+          borderless
+        />
       </div>
       <BaseButton
         className="bg-black text-white border-black"
