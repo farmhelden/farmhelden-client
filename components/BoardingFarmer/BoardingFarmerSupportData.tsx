@@ -23,6 +23,7 @@ import {
   BoardingFarmerDifficulty
 } from "./subpages";
 import { NextStepProps } from ".";
+import { BoardingFarmerStepsHeader } from "./steps";
 
 type Props = {} & NextStepProps;
 type RenderProps = {
@@ -144,6 +145,7 @@ const BoardingFarmerSupportData = (props: Props) => {
       {activeItem === null ? (
         <Fragment>
           {/* Header */}
+          <BoardingFarmerStepsHeader handleGoBack={() => setActiveItem(null)} />
           <BoardingTitle>Wobei benötigst Du Unterstützung?</BoardingTitle>
 
           {/* Overview */}
@@ -182,20 +184,8 @@ const BoardingFarmerSupportData = (props: Props) => {
       ) : (
         <Fragment>
           {/* Header */}
-          <div className="flex justify-between items-end mb-4 w-full">
-            <span
-              className="flex items-center text-primary-dark cursor-pointer"
-              onClick={() => setActiveItem(null)}
-            >
-              <ChevronLeft className="mr-1" size={16} />
-              Zurück
-            </span>
-            <Title as="h6" className="text-lg">{`Schritt ${activeItem.index +
-              1} / ${totalItems}`}</Title>
-            <span className="text-gray-500 hover:text-gray-600">
-              <Link href="/">Abbrechen</Link>
-            </span>
-          </div>
+          <BoardingFarmerStepsHeader handleGoBack={() => setActiveItem(null)} />
+
           <div className="block">
             <Title as="h2" className="mb-2 text-xl text-primary-dark" bold>
               {activeItem.title}

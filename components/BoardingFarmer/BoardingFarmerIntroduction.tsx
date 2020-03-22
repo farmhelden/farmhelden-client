@@ -3,13 +3,12 @@ import Header from "../Header";
 import { NextStepProps } from ".";
 import { PrimaryButton } from "../Button";
 
-type Props = {} & NextStepProps;
+type Props = {} & Pick<NextStepProps, "triggerNextPage">;
 
 const BoardingFarmerIntroduction = (props: Props) => {
   return (
     <Fragment>
       <Header />
-      {props.stepIndicatorBar}
       <p className="text-primary-dark font-title mb-12">
         Als landwirtschaftlicher Betrieb ist es zur Zeit nicht einfach. Erstelle
         jetzt schnell und einfach Unterstützungsanfragen und lass Dir von

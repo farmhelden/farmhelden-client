@@ -3,6 +3,7 @@ import { Container } from "@material-ui/core";
 import classnames from "classnames";
 
 import Root from "../components/Root";
+import { BooleanSwitch } from "../components/Switch";
 import {
   BoardingFarmerIntroduction,
   BoardingFarmerSupportData,
@@ -12,9 +13,9 @@ import {
 type Props = {};
 
 const steps = [
-  { index: 0, Component: BoardingFarmerIntroduction },
-  { index: 1, Component: BoardingFarmerSupportData },
-  { index: 2, Component: BoardingFarmerDateSelection }
+  // { index: 0, Component: BoardingFarmerIntroduction },
+  { index: 0, Component: BoardingFarmerSupportData },
+  { index: 1, Component: BoardingFarmerDateSelection }
 ];
 
 const lastIndex = steps.length - 1;
@@ -34,26 +35,39 @@ function Dot({ isActive }: { isActive: boolean }) {
 }
 
 const BoardingFarmer = ({}: Props) => {
+  const [hasStarted, setHasStarted] = useState(false);
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const ActiveComponent = steps[activeStepIndex].Component;
 
   return (
     <Root>
       <Container className="pt-4">
-        <ActiveComponent
-          triggerNextPage={() =>
-            setActiveStepIndex(
-              activeStepIndex === lastIndex ? lastIndex : activeStepIndex + 1
-            )
+        <BooleanSwitch
+          value={hasStarted}
+          trueRender={
+            <ActiveComponent
+              triggerNextPage={() =>
+                setActiveStepIndex(
+                  activeStepIndex === lastIndex
+                    ? lastIndex
+                    : activeStepIndex + 1
+                )
+              }
+              stepIndicatorBar={
+                <div className="w-full block text-center">
+                  {steps.map((step, i) => (
+                    <Dot key={step.index} isActive={i === activeStepIndex} />
+                  ))}
+                </div>
+              }
+            />
           }
-          stepIndicatorBar={
-            <div className="w-full block text-center">
-              {steps.slice(1).map((step, i) => (
-                <Dot key={step.index} isActive={i === activeStepIndex} />
-              ))}
-            </div>
+          falseRender={
+            <BoardingFarmerIntroduction
+              triggerNextPage={() => setHasStarted(true)}
+            />
           }
-        ></ActiveComponent>
+        />
       </Container>
     </Root>
   );
