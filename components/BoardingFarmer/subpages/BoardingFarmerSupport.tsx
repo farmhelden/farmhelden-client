@@ -17,25 +17,31 @@ const supportTypes = [
 
 const BoardingFarmerSupport = ({ state, handleUpdate }: Props) => {
   return (
-    <ul>
-      {supportTypes.map(({ id, title }) => {
-        return (
-          <li key={id}>
-            <Checkbox
-              value={id}
-              checked={state.supportTypeIds.includes(title)}
-              onChange={() =>
-                handleUpdate(updateArray(title, state.supportTypeIds))
-              }
-              className="py-1 hover:bg-gray-100"
-              block
-            >
-              {title}
-            </Checkbox>
-          </li>
-        );
-      })}
-    </ul>
+    <div>
+      <p className="mb-2">
+        Welche Form der Unterstützung wird benötigt? Es können mehrere Auswahlen
+        getroffen werden.
+      </p>
+      <ul>
+        {supportTypes.map(({ id, title }) => {
+          return (
+            <li key={id}>
+              <Checkbox
+                value={id}
+                checked={state.supportTypeIds.includes(title)}
+                onChange={() =>
+                  handleUpdate(updateArray(title, state.supportTypeIds))
+                }
+                className="py-1 hover:bg-gray-100"
+                block
+              >
+                {title}
+              </Checkbox>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 

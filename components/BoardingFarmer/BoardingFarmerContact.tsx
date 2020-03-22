@@ -18,19 +18,19 @@ const BoardingFarmerContact = (props: Props) => {
         <BoardingFarmerStepsHeader handleGoBack={() => {}} />
         <BoardingTitle>Wie können Dich Erntehelfer erreichen?</BoardingTitle>
         <Input
-          className="focus:bg-gray-200 mb-4"
+          className="bg-gray-100 focus:bg-gray-200 mb-4"
           placeholder="Namen eingeben"
           block
           borderless
         />
         <Input
-          className="focus:bg-gray-200 mb-4"
+          className="bg-gray-100 focus:bg-gray-200 mb-4"
           placeholder="E-Mail-Adresse eingeben"
           block
           borderless
         />
         <Input
-          className="focus:bg-gray-200 mb-4"
+          className="bg-gray-100 focus:bg-gray-200 mb-4"
           placeholder="Telefonnummer eingeben"
           block
           borderless
