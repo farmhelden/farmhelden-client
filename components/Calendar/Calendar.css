@@ -1,3 +1,4 @@
+/* purgecss start ignore */
 .react-calendar {
   @apply font-body;
   width: 350px;
@@ -148,3 +149,5 @@
   @apply bg-accent-light;
   /* background-color: #e6e6e6; */
 }
+
+/* purgecss end ignore */
